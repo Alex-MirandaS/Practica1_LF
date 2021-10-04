@@ -17,12 +17,8 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("INTRODUZCA VALORES");
-        String valores = scanner.nextLine();
-        
-        Analizador analizador = new Analizador();
-        //analizador.evaluarTexto(valores);
+        Principal principal = new Principal();
+        principal.inicio();
     }
     
 }

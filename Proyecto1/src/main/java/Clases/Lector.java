@@ -5,6 +5,7 @@
 package Clases;
 
 import Enums.TipoToken;
+import Main.Principal;
 import Objetos.Texto;
 import Objetos.Token;
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class Lector {
     private String estadoActual = "S0";
     private String cadena = "";
     private TipoToken tipo;
-    private boolean error;
     private String[] estadosAceptacion;
     private String[][] funcionDeTransicion;
 
@@ -28,24 +28,31 @@ public class Lector {
         reiniciarLector(tipo);
 
         boolean tokenValido = false;
-        for (int i = 0; i < texto.getValor().length(); i++) {
-            char actual = texto.getValor().charAt(i);
-            tokenValido = verificarTokenValido(actual);
-            if (tipo.equals(TipoToken.DECIMAL)) {
-                if (tokenValido == false) {
-                    break;
-                }
-            } else {
-                if (tokenValido == false || !verificarEstadosAceptacion()) {
-                    break;
+        int columnaInicio = texto.getColumna()-texto.getValor().length();
+        if (tipo != TipoToken.ERROR) {
+            for (int i = 0; i < texto.getValor().length(); i++) {
+                char actual = texto.getValor().charAt(i);
+                tokenValido = verificarTokenValido(actual);
+                columnaInicio++;
+                if (tipo.equals(TipoToken.DECIMAL)) {
+                    if (tokenValido == false) {
+                        break;
+                    }
+                } else {
+                    if (tokenValido == false || !verificarEstadosAceptacion()) {
+                        break;
+                    }
                 }
             }
-        }
-        if (tokenValido == true && verificarEstadosAceptacion()) {
-            tokens.add(new Token(cadena, 1, 1, tipo));
+            if (tokenValido == true && verificarEstadosAceptacion()) {
+                tokens.add(new Token(cadena, texto.getFila(), texto.getColumna(), tipo));
+            } else {
+                tokens.add(new Token(cadena, texto.getFila(), columnaInicio, TipoToken.ERROR));
+            }
         } else {
-            tokens.add(new Token(cadena, 1, 1, TipoToken.ERROR));
+            tokens.add(new Token(texto.getValor(), texto.getFila(), texto.getColumna(), TipoToken.ERROR));
         }
+
         return cadena.length();
     }
 

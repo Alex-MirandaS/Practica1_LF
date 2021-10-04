@@ -16,18 +16,12 @@ import java.util.ArrayList;
  */
 public class EscritorArchivosTexto<T> {
 
-    //donde se guardn los archivos binarios
-    private String ubicación;
+    //donde se guardn los archivos
+    private String ubicación = "/home/alex/Escritorio/6to Semestre Sistemas/LENGUAJES FORMALES Y DE PROGRAMACIÓN/Tareas/PRACTICA 1/";
 
-    public EscritorArchivosTexto(String ubicación) {
-        this.ubicación = ubicación;
-    }
-
-    public void guardarArchivoTexto(ArrayList<String> filasTexto, String nombre) throws IOException, FileNotFoundException {
-        FileWriter fichero = new FileWriter(ubicación+nombre+".txt");
-        for (int i = 0; i < filasTexto.size(); i++) {
-            fichero.write(filasTexto.get(i)+"\n");
-        }
+    public void guardarArchivoTexto(String texto, String nombre) throws IOException, FileNotFoundException {
+        FileWriter fichero = new FileWriter(ubicación + nombre + ".txt");
+        fichero.write(texto);
         fichero.close();
     }
 
