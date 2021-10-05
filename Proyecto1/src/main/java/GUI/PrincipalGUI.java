@@ -8,7 +8,6 @@ package GUI;
 import Main.Principal;
 import javax.swing.JTextArea;
 
-
 /**
  *
  * @author Alex
@@ -19,6 +18,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
     public PrincipalGUI(Principal principal) {
         initComponents();
+        areaTexto.setEditable(false);
+        guardar.setEnabled(false);
+        editar.setEnabled(false);
+        reportes.setEnabled(false);
         this.principal = principal;
     }
 
@@ -28,14 +31,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         carga = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
-        rErrores = new javax.swing.JButton();
-        rTokens = new javax.swing.JButton();
-        rAFDoptimo = new javax.swing.JButton();
-        recuentoLexemas = new javax.swing.JButton();
+        reportes = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        salir = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,8 +49,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridLayout(3, 3));
         jPanel4.add(jLabel7);
+        jPanel4.add(jLabel1);
         jPanel4.add(jLabel8);
-        jPanel4.add(jLabel11);
 
         carga.setText("CARGA");
         carga.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +60,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jPanel4.add(carga);
 
+        editar.setText("EDITAR");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(editar);
+
         guardar.setText("GUARDAR");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,38 +76,23 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jPanel4.add(guardar);
 
-        rErrores.setText("R. ERRORES");
-        rErrores.addActionListener(new java.awt.event.ActionListener() {
+        reportes.setText("REPORTES");
+        reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rErroresActionPerformed(evt);
+                reportesActionPerformed(evt);
             }
         });
-        jPanel4.add(rErrores);
+        jPanel4.add(reportes);
+        jPanel4.add(jLabel11);
 
-        rTokens.setText("R. TOKENS");
-        rTokens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rTokensActionPerformed(evt);
-            }
-        });
-        jPanel4.add(rTokens);
-
-        rAFDoptimo.setText("AFD ÓPTIMO");
-        jPanel4.add(rAFDoptimo);
-
-        recuentoLexemas.setText("RECUENTO DE LEXEMAS");
-        recuentoLexemas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recuentoLexemasActionPerformed(evt);
-            }
-        });
-        jPanel4.add(recuentoLexemas);
+        salir.setText("SALIR");
+        jPanel4.add(salir);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jLabel9.setText("TEXTO XDXD");
+        jLabel9.setText("TEXTO");
         jPanel8.add(jLabel9, java.awt.BorderLayout.PAGE_START);
 
         areaTexto.setColumns(20);
@@ -110,25 +106,30 @@ public class PrincipalGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rTokensActionPerformed
-        principal.reporteTokens();
-    }//GEN-LAST:event_rTokensActionPerformed
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        principal.guardarArchivo();
+        areaTexto.setEditable(false);
+        guardar.setEnabled(false);
+        editar.setEnabled(true);
+        reportes.setEnabled(true);
+    }//GEN-LAST:event_guardarActionPerformed
 
     private void cargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaActionPerformed
         principal.cargarArchivo();
+        editar.setEnabled(true);
+        reportes.setEnabled(true);
     }//GEN-LAST:event_cargaActionPerformed
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        principal.guardarArchivo();
-    }//GEN-LAST:event_guardarActionPerformed
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        areaTexto.setEditable(true);
+        editar.setEnabled(false);
+        guardar.setEnabled(true);
+        reportes.setEnabled(false);
+    }//GEN-LAST:event_editarActionPerformed
 
-    private void rErroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rErroresActionPerformed
-        principal.reporteErrores();
-    }//GEN-LAST:event_rErroresActionPerformed
-
-    private void recuentoLexemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recuentoLexemasActionPerformed
-       principal.recuentoLexemas();
-    }//GEN-LAST:event_recuentoLexemasActionPerformed
+    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        principal.reportes();
+    }//GEN-LAST:event_reportesActionPerformed
 
     public JTextArea getAreaTexto() {
         return areaTexto;
@@ -138,7 +139,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTexto;
     private javax.swing.JButton carga;
+    private javax.swing.JButton editar;
     private javax.swing.JButton guardar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -146,9 +149,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton rAFDoptimo;
-    private javax.swing.JButton rErrores;
-    private javax.swing.JButton rTokens;
-    private javax.swing.JButton recuentoLexemas;
+    private javax.swing.JButton reportes;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

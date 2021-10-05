@@ -38,9 +38,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel7">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="jLabel1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="jLabel8">
         </Component>
         <Component class="javax.swing.JButton" name="carga">
           <Properties>
@@ -48,6 +48,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cargaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="editar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="EDITAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="guardar">
@@ -58,34 +66,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rErrores">
+        <Component class="javax.swing.JButton" name="reportes">
           <Properties>
-            <Property name="text" type="java.lang.String" value="R. ERRORES"/>
+            <Property name="text" type="java.lang.String" value="REPORTES"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rErroresActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rTokens">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="R. TOKENS"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rTokensActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JLabel" name="jLabel11">
         </Component>
-        <Component class="javax.swing.JButton" name="rAFDoptimo">
+        <Component class="javax.swing.JButton" name="salir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="AFD &#xd3;PTIMO"/>
+            <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="recuentoLexemas">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="RECUENTO DE LEXEMAS"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recuentoLexemasActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -100,7 +94,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="TEXTO XDXD"/>
+            <Property name="text" type="java.lang.String" value="TEXTO"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

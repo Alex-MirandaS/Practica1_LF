@@ -177,4 +177,9 @@ public class Analizador {
             darSeguimiento(cCaracteres1, texto, lista);
         }
     }
+
+    public Lector getLector() {
+        return lector;
+    }
+    
 }

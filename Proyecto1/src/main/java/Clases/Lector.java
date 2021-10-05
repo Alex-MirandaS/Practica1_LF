@@ -21,6 +21,8 @@ public class Lector {
     private TipoToken tipo;
     private String[] estadosAceptacion;
     private String[][] funcionDeTransicion;
+    private ArrayList<String> movimientos;
+    private ArrayList<ArrayList<String>> movimientosTotales = new ArrayList<>();
 
 //solo se cambia el estado actual
     public int iniciarLector(Texto texto, TipoToken tipo, ArrayList<Token> tokens) {
@@ -28,8 +30,9 @@ public class Lector {
         reiniciarLector(tipo);
 
         boolean tokenValido = false;
-        int columnaInicio = texto.getColumna()-texto.getValor().length();
+        int columnaInicio = texto.getColumna() - texto.getValor().length();
         if (tipo != TipoToken.ERROR) {
+            añadirPalabraRegistro(texto.getValor());
             for (int i = 0; i < texto.getValor().length(); i++) {
                 char actual = texto.getValor().charAt(i);
                 tokenValido = verificarTokenValido(actual);
@@ -64,16 +67,18 @@ public class Lector {
             String siguiente = funcionDeTransicion[j][2];
 
             if (primeraPosicion.equalsIgnoreCase(estadoActual) && valor.equalsIgnoreCase(String.valueOf(tipoToken))) {
+                añadirMovimientoRegistro(siguiente, actual);
                 estadoActual = siguiente;
                 cadena += actual;
                 return true;
             }
         }
+        guardarMovimientosTotales();
         cadena += actual;
         return false;
     }
 
-    public char obtenerTipoCaracter(char actual) {
+    private char obtenerTipoCaracter(char actual) {
 
         if (evaluarCHAR(actual, InformaciónTokens.alfabetoLetras)) {
             return 'L';
@@ -153,4 +158,22 @@ public class Lector {
         estadoActual = "S0";
         cadena = "";
     }
+
+    private void añadirPalabraRegistro(String token) {
+        movimientos = new ArrayList<>();
+        movimientos.add(token);
+    }
+
+    private void añadirMovimientoRegistro(String estado, char valor) {
+        movimientos.add("Me moví del estado " + estadoActual + " al estado " + estado + " con una " + valor);
+    }
+
+    private void guardarMovimientosTotales() {
+        movimientosTotales.add(movimientos);
+    }
+
+    public ArrayList<ArrayList<String>> getMovimientosTotales() {
+        return movimientosTotales;
+    }
+    
 }

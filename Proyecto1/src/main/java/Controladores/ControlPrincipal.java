@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +54,22 @@ public class ControlPrincipal {
         return filasArchivo;
     }
 
+    public void guardarArchivo() {
+        // JFileChooser fileChosser = new JFileChooser();
+        // int seleccion = fileChosser.showDialog(null, "Guardar");
+
+        // if (seleccion == JFileChooser.APPROVE_OPTION) {
+        //aqui selecciono y guardo el FILE que va a utilizar el FileReader
+        //File fichero = fileChosser.getSelectedFile();
+        try {
+            principal.getEscritorArchivos().guardarArchivoTexto(principal.getPrincipalGUI().getAreaTexto().getText());
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
     public void mostrarTextArea() {
         principal.getPrincipalGUI().getAreaTexto().setText("");
         for (int i = 0; i < filasArchivo.size(); i++) {
@@ -62,6 +80,20 @@ public class ControlPrincipal {
 
     public void verificarTokens() {
         tokens = principal.getAnalizador().evaluarTextoTotal(filasArchivo);
+    }
+
+    public void mostrarReportes() {
+        verificarTokens();
+        for (int i = 0; i < tokens.size(); i++) {
+            if (tokens.get(i).getTipo().equals(TipoToken.ERROR)) {
+                principal.getReportesGUI().getrErrores().setEnabled(true);
+                principal.getReportesGUI().getrLexemas().setEnabled(false);
+                principal.getReportesGUI().getrTokens().setEnabled(false);
+                break;
+            }
+            principal.getReportesGUI().getrErrores().setEnabled(false);
+        }
+        principal.getReportesGUI().setVisible(true);
     }
 
     public void abrirReporteErrores() {
@@ -150,7 +182,7 @@ public class ControlPrincipal {
         burbuja(contables);
         return contables;
     }
-    
+
     public void burbuja(ArrayList<Contable> contables) {
         int i, j;
         Contable aux;
@@ -159,11 +191,11 @@ public class ControlPrincipal {
                 //cambiar a <
                 if (contables.get(j + 1).getCantidad() > contables.get(j).getCantidad()) {
                     aux = contables.get(j + 1);
-                    contables.set(j+1, contables.get(j));
+                    contables.set(j + 1, contables.get(j));
                     contables.set(j, aux);
                 }
             }
         }
-}
+    }
 
 }

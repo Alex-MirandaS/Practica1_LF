@@ -9,11 +9,11 @@ import Archivos.LectorArchivosEnTexto;
 import Clases.Analizador;
 import Controladores.ControlPrincipal;
 import GUI.PrincipalGUI;
+import GUI.ReportesGUI;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
@@ -23,6 +23,7 @@ public class Principal {
 
     //GUI
     private PrincipalGUI principalGUI = new PrincipalGUI(this);
+    private ReportesGUI reportesGUI = new ReportesGUI(this);
     //CLASES
     private LectorArchivosEnTexto lectorArchivos = new LectorArchivosEnTexto();
     private EscritorArchivosTexto escritorArchivos = new EscritorArchivosTexto();
@@ -39,26 +40,34 @@ public class Principal {
     }
 
     public void guardarArchivo() {
-        try {
-            escritorArchivos.guardarArchivoTexto(principalGUI.getAreaTexto().getText(), "ARCHIVO GUARDADO");
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controlPrincipal.guardarArchivo();
+    }
+
+    public void reportes() {
+       controlPrincipal.mostrarReportes();
     }
 
     public void reporteErrores() {
-        controlPrincipal.verificarTokens();
         controlPrincipal.abrirReporteErrores();
     }
 
     public void reporteTokens() {
-        controlPrincipal.verificarTokens();
         controlPrincipal.abrirReporteTokens();
+        imprimirEstados();
     }
 
     public void recuentoLexemas() {
-        controlPrincipal.verificarTokens();
         controlPrincipal.abrirRecuentoLexemas();
+    }
+
+    public void imprimirEstados() {
+
+        for (int i = 0; i < analizador.getLector().getMovimientosTotales().size(); i++) {
+            System.out.println("PALABRA: " + analizador.getLector().getMovimientosTotales().get(i).get(0) + "\n");
+            for (int j = 0; j < analizador.getLector().getMovimientosTotales().get(i).size(); j++) {
+                System.out.println(analizador.getLector().getMovimientosTotales().get(i).get(j));
+            }
+        }
     }
 
     public PrincipalGUI getPrincipalGUI() {
@@ -79,6 +88,10 @@ public class Principal {
 
     public ControlPrincipal getControlPrincipal() {
         return controlPrincipal;
+    }
+
+    public ReportesGUI getReportesGUI() {
+        return reportesGUI;
     }
 
 }

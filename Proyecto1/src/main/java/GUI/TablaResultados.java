@@ -17,7 +17,7 @@ public class TablaResultados extends javax.swing.JFrame {
 
     public TablaResultados() {
         initComponents();
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public JTable getTabla() {
