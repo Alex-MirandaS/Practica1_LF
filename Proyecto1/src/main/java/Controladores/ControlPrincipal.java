@@ -10,15 +10,22 @@ import GUI.TablaResultados;
 import Main.Principal;
 import Objetos.Contable;
 import Objetos.Token;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 /**
  *
@@ -70,11 +77,11 @@ public class ControlPrincipal {
 
     }
 
-    public void mostrarTextArea() {
-        principal.getPrincipalGUI().getAreaTexto().setText("");
+    public void mostrarTextArea(JTextArea areaTexto) {
+        areaTexto.setText("");
         for (int i = 0; i < filasArchivo.size(); i++) {
-            principal.getPrincipalGUI().getAreaTexto().append(filasArchivo.get(i));
-            principal.getPrincipalGUI().getAreaTexto().append(System.getProperty("line.separator"));
+            areaTexto.append(filasArchivo.get(i));
+            areaTexto.append(System.getProperty("line.separator"));
         }
     }
 
@@ -92,6 +99,8 @@ public class ControlPrincipal {
                 break;
             }
             principal.getReportesGUI().getrErrores().setEnabled(false);
+            principal.getReportesGUI().getrLexemas().setEnabled(true);
+            principal.getReportesGUI().getrTokens().setEnabled(true);
         }
         principal.getReportesGUI().setVisible(true);
     }
@@ -181,6 +190,47 @@ public class ControlPrincipal {
         }
         burbuja(contables);
         return contables;
+    }
+
+    public void abrirReporteAFD() {
+
+        TablaResultados tabla = new TablaResultados();
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.getTabla().setModel(modelo);
+        modelo.addColumn("REPORTE AFD OPTIMO");
+        for (int i = 0; i < principal.getAnalizador().getLector().getMovimientosTotales().size(); i++) {
+            modelo.addRow(new Object[]{principal.getAnalizador().getLector().getMovimientosTotales().get(i).get(0)});
+            for (int j = 1; j < principal.getAnalizador().getLector().getMovimientosTotales().get(i).size(); j++) {
+                modelo.addRow(new Object[]{"        " + principal.getAnalizador().getLector().getMovimientosTotales().get(i).get(j)});
+            }
+            tabla.setVisible(true);
+        }
+    }
+
+    public void abrirBusquedaPatrones() {
+        principal.getBusquedaGUI().setVisible(true);
+    }
+
+    
+    public void buscarPatron(JTextArea areaTexto, String texto) {
+        if (texto.length() >= 1) {
+            DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+            Highlighter h = areaTexto.getHighlighter();
+            h.removeAllHighlights();
+            String text = areaTexto.getText();
+            String caracteres = texto;
+            Pattern p = Pattern.compile("(?i)" + caracteres);
+            Matcher m = p.matcher(text);
+            while (m.find()) {
+                try {
+                    h.addHighlight(m.start(), m.end(), highlightPainter);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(Color.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(areaTexto, "la palabra a buscar no puede ser vacia");
+        }
     }
 
     public void burbuja(ArrayList<Contable> contables) {

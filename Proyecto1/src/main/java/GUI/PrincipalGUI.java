@@ -6,6 +6,7 @@
 package GUI;
 
 import Main.Principal;
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 /**
@@ -32,12 +33,15 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         carga = new javax.swing.JButton();
         editar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
+        busqueda = new javax.swing.JButton();
         reportes = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         salir = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -47,9 +51,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IDENTIFICADOR");
 
-        jPanel4.setLayout(new java.awt.GridLayout(3, 3));
+        jPanel4.setLayout(new java.awt.GridLayout(3, 4));
         jPanel4.add(jLabel7);
         jPanel4.add(jLabel1);
+        jPanel4.add(jLabel2);
         jPanel4.add(jLabel8);
 
         carga.setText("CARGA");
@@ -76,6 +81,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jPanel4.add(guardar);
 
+        busqueda.setText("BUSQUEDA");
+        busqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busquedaActionPerformed(evt);
+            }
+        });
+        jPanel4.add(busqueda);
+
         reportes.setText("REPORTES");
         reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +97,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jPanel4.add(reportes);
         jPanel4.add(jLabel11);
+        jPanel4.add(jLabel3);
 
         salir.setText("SALIR");
         jPanel4.add(salir);
@@ -131,6 +145,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
         principal.reportes();
     }//GEN-LAST:event_reportesActionPerformed
 
+    private void busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaActionPerformed
+        principal.busquedaPatrones();
+    }//GEN-LAST:event_busquedaActionPerformed
+
     public JTextArea getAreaTexto() {
         return areaTexto;
     }
@@ -138,11 +156,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTexto;
+    private javax.swing.JButton busqueda;
     private javax.swing.JButton carga;
     private javax.swing.JButton editar;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

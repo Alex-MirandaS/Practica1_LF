@@ -103,6 +103,11 @@ public class ReportesGUI extends javax.swing.JFrame {
         jPanel4.add(rLexemas);
 
         rAFD.setText("AFD OPTIMO");
+        rAFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rAFDActionPerformed(evt);
+            }
+        });
         jPanel4.add(rAFD);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -146,6 +151,10 @@ public class ReportesGUI extends javax.swing.JFrame {
     private void rLexemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rLexemasActionPerformed
         principal.recuentoLexemas();
     }//GEN-LAST:event_rLexemasActionPerformed
+
+    private void rAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAFDActionPerformed
+        principal.reporteAFD();
+    }//GEN-LAST:event_rAFDActionPerformed
 
     public JButton getrAFD() {
         return rAFD;

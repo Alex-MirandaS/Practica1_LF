@@ -38,7 +38,6 @@ public class InicioGUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         abrirArchivo = new javax.swing.JButton();
-        crearArchivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,14 +77,6 @@ public class InicioGUI extends javax.swing.JFrame {
         });
         jPanel3.add(abrirArchivo);
 
-        crearArchivo.setText("CREAR ARCHIVO");
-        crearArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearArchivoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(crearArchivo);
-
         jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel2);
@@ -95,17 +86,12 @@ public class InicioGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void crearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearArchivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_crearArchivoActionPerformed
-
     private void abrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirArchivoActionPerformed
         principal.inicio();
     }//GEN-LAST:event_abrirArchivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirArchivo;
-    private javax.swing.JButton crearArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

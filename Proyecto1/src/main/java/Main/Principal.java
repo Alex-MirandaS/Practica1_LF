@@ -8,12 +8,14 @@ import Archivos.EscritorArchivosTexto;
 import Archivos.LectorArchivosEnTexto;
 import Clases.Analizador;
 import Controladores.ControlPrincipal;
+import GUI.BusquedaGUI;
 import GUI.PrincipalGUI;
 import GUI.ReportesGUI;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Principal {
     //GUI
     private PrincipalGUI principalGUI = new PrincipalGUI(this);
     private ReportesGUI reportesGUI = new ReportesGUI(this);
+    private BusquedaGUI busquedaGUI;
     //CLASES
     private LectorArchivosEnTexto lectorArchivos = new LectorArchivosEnTexto();
     private EscritorArchivosTexto escritorArchivos = new EscritorArchivosTexto();
@@ -31,12 +34,13 @@ public class Principal {
     private ControlPrincipal controlPrincipal = new ControlPrincipal(this);
 
     public void inicio() {
+        principalGUI.setExtendedState(JFrame.MAXIMIZED_BOTH);
         principalGUI.setVisible(true);
     }
 
     public void cargarArchivo() {
         controlPrincipal.seleccionarArchivo();
-        controlPrincipal.mostrarTextArea();
+        controlPrincipal.mostrarTextArea(principalGUI.getAreaTexto());
     }
 
     public void guardarArchivo() {
@@ -44,7 +48,7 @@ public class Principal {
     }
 
     public void reportes() {
-       controlPrincipal.mostrarReportes();
+        controlPrincipal.mostrarReportes();
     }
 
     public void reporteErrores() {
@@ -53,21 +57,19 @@ public class Principal {
 
     public void reporteTokens() {
         controlPrincipal.abrirReporteTokens();
-        imprimirEstados();
     }
 
     public void recuentoLexemas() {
         controlPrincipal.abrirRecuentoLexemas();
     }
 
-    public void imprimirEstados() {
+    public void reporteAFD() {
+        controlPrincipal.abrirReporteAFD();
+    }
 
-        for (int i = 0; i < analizador.getLector().getMovimientosTotales().size(); i++) {
-            System.out.println("PALABRA: " + analizador.getLector().getMovimientosTotales().get(i).get(0) + "\n");
-            for (int j = 0; j < analizador.getLector().getMovimientosTotales().get(i).size(); j++) {
-                System.out.println(analizador.getLector().getMovimientosTotales().get(i).get(j));
-            }
-        }
+    public void busquedaPatrones() {
+        busquedaGUI = new BusquedaGUI(this);
+        busquedaGUI.setVisible(true);
     }
 
     public PrincipalGUI getPrincipalGUI() {
@@ -92,6 +94,10 @@ public class Principal {
 
     public ReportesGUI getReportesGUI() {
         return reportesGUI;
+    }
+
+    public BusquedaGUI getBusquedaGUI() {
+        return busquedaGUI;
     }
 
 }

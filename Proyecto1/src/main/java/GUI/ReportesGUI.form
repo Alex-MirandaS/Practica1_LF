@@ -176,6 +176,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="AFD OPTIMO"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rAFDActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
