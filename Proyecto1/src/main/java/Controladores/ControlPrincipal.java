@@ -62,14 +62,11 @@ public class ControlPrincipal {
     }
 
     public void guardarArchivo() {
-        // JFileChooser fileChosser = new JFileChooser();
-        // int seleccion = fileChosser.showDialog(null, "Guardar");
 
-        // if (seleccion == JFileChooser.APPROVE_OPTION) {
-        //aqui selecciono y guardo el FILE que va a utilizar el FileReader
-        //File fichero = fileChosser.getSelectedFile();
         try {
             principal.getEscritorArchivos().guardarArchivoTexto(principal.getPrincipalGUI().getAreaTexto().getText());
+             JOptionPane.showMessageDialog(null, "ARCHIVO GUARDADO, SE NECESITA VOLVER A ABRIRLO");
+             principal.getPrincipalGUI().getAreaTexto().setText("");
         } catch (IOException ex) {
             Logger.getLogger(ControlPrincipal.class.getName()).log(Level.SEVERE, null, ex);
 

@@ -5,6 +5,7 @@
  */
 package Archivos;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -17,11 +18,16 @@ import java.util.ArrayList;
  */
 public class EscritorArchivosTexto {
 
-    //donde se guardn los archivos
-    private String ubicación = "/home/alex/Escritorio/6to Semestre Sistemas/LENGUAJES FORMALES Y DE PROGRAMACIÓN/Tareas/PRACTICA 1/";
+    //donde se guardan los archivos
+    private String ubicación = "archivos/Archivo Guardado.txt";
 
     public void guardarArchivoTexto(String texto) throws IOException, FileNotFoundException {
-        FileWriter fichero = new FileWriter(ubicación+"Archivo Guardado.txt");
+        File archivo = new File(ubicación);
+        File temp = new File(archivo.getParentFile().getAbsolutePath());
+        if (!temp.exists()) {
+            temp.mkdirs();
+        }
+        FileWriter fichero = new FileWriter(archivo);
         fichero.write(texto);
         fichero.close();
     }

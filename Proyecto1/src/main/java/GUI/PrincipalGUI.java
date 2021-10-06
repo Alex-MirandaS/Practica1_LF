@@ -23,6 +23,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         guardar.setEnabled(false);
         editar.setEnabled(false);
         reportes.setEnabled(false);
+        busqueda.setEnabled(false);
         this.principal = principal;
     }
 
@@ -100,6 +101,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jPanel4.add(jLabel3);
 
         salir.setText("SALIR");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
         jPanel4.add(salir);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_END);
@@ -124,14 +130,19 @@ public class PrincipalGUI extends javax.swing.JFrame {
         principal.guardarArchivo();
         areaTexto.setEditable(false);
         guardar.setEnabled(false);
-        editar.setEnabled(true);
-        reportes.setEnabled(true);
+        editar.setEnabled(false);
+        reportes.setEnabled(false);
+        busqueda.setEnabled(false);
+        carga.setEnabled(true);
+
     }//GEN-LAST:event_guardarActionPerformed
 
     private void cargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaActionPerformed
         principal.cargarArchivo();
         editar.setEnabled(true);
+        guardar.setEnabled(false);
         reportes.setEnabled(true);
+        busqueda.setEnabled(true);
     }//GEN-LAST:event_cargaActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
@@ -139,6 +150,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         editar.setEnabled(false);
         guardar.setEnabled(true);
         reportes.setEnabled(false);
+        busqueda.setEnabled(false);
     }//GEN-LAST:event_editarActionPerformed
 
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
@@ -148,6 +160,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaActionPerformed
         principal.busquedaPatrones();
     }//GEN-LAST:event_busquedaActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_salirActionPerformed
 
     public JTextArea getAreaTexto() {
         return areaTexto;

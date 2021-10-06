@@ -18,6 +18,7 @@ public class BusquedaGUI extends javax.swing.JFrame {
         initComponents();
         this.principal = principal;
         this.principal.getControlPrincipal().mostrarTextArea(areaTexto);
+        this.areaTexto.setEditable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -71,6 +72,11 @@ public class BusquedaGUI extends javax.swing.JFrame {
         jPanel5.add(buscar);
 
         salir.setText("SALIR");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
         jPanel5.add(salir);
 
         jPanel4.add(jPanel5, java.awt.BorderLayout.LINE_END);
@@ -92,6 +98,10 @@ public class BusquedaGUI extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         principal.getControlPrincipal().buscarPatron(areaTexto, barraBusqueda.getText());
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+     this.setVisible(false);
+    }//GEN-LAST:event_salirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
