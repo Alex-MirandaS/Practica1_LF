@@ -24,7 +24,7 @@ public class Lector {
     private ArrayList<String> movimientos;
     private ArrayList<ArrayList<String>> movimientosTotales = new ArrayList<>();
 
-//solo se cambia el estado actual
+//Se encarga de iniciar el Lector, con un texto y el tipo de token posible, y el arreglo en donde se guardará el resultado
     public int iniciarLector(Texto texto, TipoToken tipo, ArrayList<Token> tokens) {
 
         reiniciarLector(tipo);
@@ -58,7 +58,7 @@ public class Lector {
 
         return cadena.length();
     }
-
+//Es el encargado de realizar los movimientos respectivos del automata, siguiendo las transiciones
     private boolean verificarTokenValido(char actual) {
         for (int j = 0; j < funcionDeTransicion.length; j++) {
             char tipoToken = obtenerTipoCaracter(actual);
@@ -77,7 +77,7 @@ public class Lector {
         cadena += actual;
         return false;
     }
-
+//Evalua un caracter y devuelve el tipo de caracter al que pertenece segun el alfabeto
     private char obtenerTipoCaracter(char actual) {
 
         if (evaluarCHAR(actual, InformaciónTokens.alfabetoLetras)) {
@@ -103,7 +103,8 @@ public class Lector {
         }
         return 'E';
     }
-
+/*Se encarga de otorgarle los valores al lector, tanto los estados de aceptación y la funcion de transicion
+  dependiendo del tipo del token del cual se va a evaluar*/
     private void definirEstadosYFuncion(TipoToken tipo) {
         switch (tipo) {
             case IDENTIFICADOR:
@@ -133,7 +134,7 @@ public class Lector {
         }
 
     }
-
+//Devuelve una verificación si el char enviado existe dentro de un alfabeto en especifico
     private boolean evaluarCHAR(char charEvaluado, String[] datos) {
         for (int i = 0; i < datos.length; i++) {
             if (String.valueOf(charEvaluado).equalsIgnoreCase(datos[i])) {
@@ -142,7 +143,7 @@ public class Lector {
         }
         return false;
     }
-
+//Verifica si el estado actual corresponde a un estado de aceptación
     private boolean verificarEstadosAceptacion() {
         for (int i = 0; i < estadosAceptacion.length; i++) {
             if (estadoActual.equalsIgnoreCase(estadosAceptacion[i])) {
@@ -151,23 +152,23 @@ public class Lector {
         }
         return false;
     }
-
+//Es el encargado de reiniciar el lector, segun el tipo de token nuevo que se evaluara
     private void reiniciarLector(TipoToken tipo) {
         this.tipo = tipo;
         definirEstadosYFuncion(tipo);
         estadoActual = "S0";
         cadena = "";
     }
-
+//Se encarga de agregar una nueva palabra al registro de AFD optimo
     private void añadirPalabraRegistro(String token) {
         movimientos = new ArrayList<>();
         movimientos.add(token);
     }
-
+//Se encarga de agregar un nuevo movimiento al registro de AFD optimo
     private void añadirMovimientoRegistro(String estado, char valor) {
         movimientos.add("Me moví del estado " + estadoActual + " al estado " + estado + " con una " + valor);
     }
-
+//Se encarga de guardar y agregar el registro total de una palabra a una lista con todos los registros de todos los lexemas
     private void guardarMovimientosTotales() {
         movimientosTotales.add(movimientos);
     }

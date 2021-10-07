@@ -46,12 +46,6 @@ public class Analizador {
         for (i = 0; i < textoFila.length(); i++) {
             if (textoFila.charAt(i) != ' ') {
                 textoTemp += textoFila.charAt(i);
-//                if ((i + 1) < textoFila.length() && textoFila.charAt(i + 1) == ' ') {
-//                    temporal.add(new Texto(textoTemp, fila, i + 1));
-//                    textoTemp = "";
-//                } else if ((i + 1) == textoFila.length() && textoFila.charAt(i) != ' ') {
-//                    temporal.add(new Texto(textoTemp, fila, i + 1));
-//                }
             } else if (textoFila.charAt(i) == ' ' && textoTemp.length() != 0) {
                 temporal.add(new Texto(textoTemp, fila, i));
                 textoTemp = "";
@@ -61,18 +55,6 @@ public class Analizador {
             temporal.add(new Texto(textoTemp, fila, i));
         }
 
-//        ArrayList<Texto> textos = new ArrayList<>();
-//        String textoTemp = "";
-//        for (int i = 0; i < linea.length(); i++) {
-//            if (linea.charAt(i) != ' ') {
-//                textoTemp = textoTemp + linea.charAt(i);
-//            } else {
-//                if (textoTemp.length() != 0) {
-//                    textos.add(new Texto(textoTemp, fila, i + 1));
-//                }
-//                textoTemp = "";
-//            }
-//        }
         return temporal;
     }
 
@@ -103,36 +85,36 @@ public class Analizador {
             evaluarError(texto, lista);
         }
     }
-
+//Se encarga de evaluar un texto, tomandolo como un posible identificador
     private void evaluarIdentificador(Texto texto, ArrayList<Token> lista) {
         int cCaracteres = lector.iniciarLector(texto, TipoToken.IDENTIFICADOR, lista);
         darSeguimiento(cCaracteres, texto, lista);
     }
-
+//Se encarga de evaluar un texto, tomandolo como un posible numero
     private void evaluarNumero(Texto texto, ArrayList<Token> lista) {
         int cCaracteres = lector.iniciarLector(texto, TipoToken.NUMERO, lista);
         evaluarDecimal(cCaracteres, texto, lista);
     }
-
+//Se encarga de evaluar un texto, tomandolo como un posible puntuacion
     private void evaluarPuntuacion(Texto texto, ArrayList<Token> lista) {
         int cCaracteres = lector.iniciarLector(texto, TipoToken.PUNTUACION, lista);
         darSeguimiento(cCaracteres, texto, lista);
     }
-
+//Se encarga de evaluar un texto, tomandolo como un posible operador
     private void evaluarOperador(Texto texto, ArrayList<Token> lista) {
         int cCaracteres = lector.iniciarLector(texto, TipoToken.OPERADOR, lista);
         darSeguimiento(cCaracteres, texto, lista);
     }
-
+//Se encarga de evaluar un texto, tomandolo como un posible agrupacion
     private void evaluarAgrupacion(Texto texto, ArrayList<Token> lista) {
         int cCaracteres = lector.iniciarLector(texto, TipoToken.AGRUPACION, lista);
         darSeguimiento(cCaracteres, texto, lista);
     }
-
+//Se encarga de evaluar y tratar a un texto como error
     private void evaluarError(Texto texto, ArrayList<Token> lista) {
         lector.iniciarLector(texto, TipoToken.ERROR, lista);
     }
-
+//Se encarga de verificar si un char en espeficico es parte del abecedario aceptado por el automata
     private boolean evaluarCHAR(char charEvaluado, String[] datos) {
         for (int i = 0; i < datos.length; i++) {
             if (String.valueOf(charEvaluado).equalsIgnoreCase(datos[i])) {
@@ -141,7 +123,7 @@ public class Analizador {
         }
         return false;
     }
-
+//Se encarga de crear un nuevo texto con el residuo de uno fallido, ya que esto permite la recuperación de errores
     private Texto redimensionarTexto(Texto texto, int cCaracteres) {
         Texto textoTemp = null;
         char[] caracteres = texto.getValor().toCharArray();
@@ -152,20 +134,14 @@ public class Analizador {
         textoTemp = new Texto(nuevoTexto, texto.getFila(), texto.getColumna());
         return textoTemp;
     }
-
+/*Es el encargado de verficicar si es necesario seguir leyendo un texto en espeficico, solamente si el mismo contiene 
+  residuos de texto  */
     private void darSeguimiento(int cCaracteres, Texto texto, ArrayList<Token> lista) {
         if (cCaracteres != texto.getValor().length()) {
             verificarTipoToken(redimensionarTexto(texto, cCaracteres), lista);
         }
     }
-
-    private void imprimir(ArrayList<Token> temp) {
-        for (int i = 0; i < temp.size(); i++) {
-            System.out.println("TOKEN: " + temp.get(i).getTipo().getNombre());
-            System.out.println("VALOR: " + temp.get(i).getValor() + "\n");
-        }
-    }
-
+//Se encarga de evaluar un texto, tomandolo como un posible decimal
     private void evaluarDecimal(int cCaracteres, Texto texto, ArrayList<Token> lista) {
 
         if (cCaracteres != texto.getValor().length()) {

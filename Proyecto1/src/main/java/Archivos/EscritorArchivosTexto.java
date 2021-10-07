@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class EscritorArchivosTexto {
 
     //donde se guardan los archivos
-    private String ubicación = "archivos/Archivo Guardado.txt";
-
+    private String ubicación = "/archivos/Archivo Guardado.txt";
+//Se encarga de guardar un texto en un archivo .txt
     public void guardarArchivoTexto(String texto) throws IOException, FileNotFoundException {
         File archivo = new File(ubicación);
         File temp = new File(archivo.getParentFile().getAbsolutePath());

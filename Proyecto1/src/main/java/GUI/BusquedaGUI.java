@@ -5,6 +5,7 @@
 package GUI;
 
 import Main.Principal;
+import java.awt.Color;
 
 /**
  *
@@ -19,7 +20,7 @@ public class BusquedaGUI extends javax.swing.JFrame {
         this.principal = principal;
         this.principal.getControlPrincipal().mostrarTextArea(areaTexto);
         this.areaTexto.setEditable(false);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);        
     }
 
     @SuppressWarnings("unchecked")
@@ -42,25 +43,30 @@ public class BusquedaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 51));
         jLabel1.setText(" ");
         getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 51));
         jLabel2.setText("   ");
         jPanel1.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
+        jLabel3.setBackground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("   ");
         jPanel1.add(jLabel3, java.awt.BorderLayout.PAGE_END);
 
         jLabel4.setText("  ");
         jPanel1.add(jLabel4, java.awt.BorderLayout.LINE_END);
 
+        jLabel5.setBackground(new java.awt.Color(0, 0, 51));
         jLabel5.setText("  ");
         jPanel1.add(jLabel5, java.awt.BorderLayout.LINE_START);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
+        jPanel5.setBackground(new java.awt.Color(0, 0, 51));
         jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
         buscar.setText("BUSCAR");
